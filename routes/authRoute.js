@@ -1,22 +1,25 @@
+// routes/authRoutes.js
 import express from "express";
 import {
   registerController,
-  loginController,
-  testController,
+  loginController
 } from "../controllers/authController.js";
-import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
+import { requireSignIn, isAdmin } from "../middlewares/authMiddleware.js";
 
-//router object
 const router = express.Router();
 
-//routing
-//REGISTER || METHOD POST
+// 🔐 Auth Routes
+
+// @route   POST /api/v1/auth/register
+// @desc    Register a new user
 router.post("/register", registerController);
 
-//LOGIN || POST
+// @route   POST /api/v1/auth/login
+// @desc    Login existing user
 router.post("/login", loginController);
 
-//test routes
-router.get("/test", requireSignIn, isAdmin, testController);
+// @route   GET /api/v1/auth/test
+// @desc    Test route (protected, admin only)
+
 
 export default router;
